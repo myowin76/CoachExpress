@@ -1,13 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { JourneysRoutingModule } from './trips-routing.module';
-import { JourneysComponent }    from './trips.component';
+import { JourneysComponent }    from './journeys.component';
 
 @NgModule({
   imports: [
-    CommonModule,
-    JourneysRoutingModule
+    CommonModule
   ],
   declarations: [
   	JourneysComponent

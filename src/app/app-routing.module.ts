@@ -3,11 +3,16 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { TripsComponent }  from './trips/trips.component';
 import { JourneysComponent }  from './journeys/journeys.component';
+import { DashboardComponent }  from './dashboard/dashboard.component';
 
 const appRoutes: Routes = [
   {
     path: '',
     component: TripsComponent
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent
   },
   {
   	path: 'trips',

@@ -1,3 +1,17 @@
 <p>
   journeys works!
 </p>
+
+<input class="search-bar" placeholder="Search"(keyup)="search(input.value)" #input>
+
+<!-- <journeys-list *ngIf="filtered" [journeys]="filtered"></journeys-list> -->
+
+<table>
+    <tbody>
+	test - {{journeys}}
+    <tr *ngFor="let journey of journeys | async">
+        <td>test {{journey.trip_title}} </td>
+    </tr>
+    </tbody>
+</table>
+

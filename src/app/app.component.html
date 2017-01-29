@@ -3,5 +3,11 @@
 	<a routerLink="/journeys" routerLinkActive="active">Journeys</a>
 </nav>
 
-
 <router-outlet></router-outlet>
+
+<ul>
+	<li *ngFor="let trip of trips | async">
+		
+		{{trip.$key}}
+	</li>
+</ul>
