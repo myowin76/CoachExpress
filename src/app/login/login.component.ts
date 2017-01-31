@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from "@angular/forms";
-import {AuthService} from "../shared/security/auth.service";
-import {Router} from "@angular/router";
+import { AuthService } from "../shared/security/auth.service";
+import { Router } from "@angular/router";
 
 
 @Component({
@@ -29,12 +29,11 @@ export class LoginComponent implements OnInit {
 
 
 	  login() {
-
 	      const formValue = this.form.value;
 
 	      this.authService.login(formValue.email, formValue.password)
 	          .subscribe(
-	              () => this.router.navigate(['/home']),
+	              () => this.router.navigate(['/dashboard']),
 	              alert
 	          );
 

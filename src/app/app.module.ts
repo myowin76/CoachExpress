@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AngularFireModule } from 'angularfire2';
-import { firebaseConfig } from './../environments/firebase.config';
+import { firebaseConfig, authConfig } from './../environments/firebase.config';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
@@ -42,7 +42,7 @@ import { LoginComponent } from './login/login.component';
     HttpModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    AngularFireModule.initializeApp(firebaseConfig)
+    AngularFireModule.initializeApp(firebaseConfig, authConfig)
   ],
   providers: [JourneysService, AuthService, AuthGuard],
   bootstrap: [AppComponent]

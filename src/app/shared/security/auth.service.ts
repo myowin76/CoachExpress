@@ -13,7 +13,7 @@ export class AuthService {
   authInfo$: BehaviorSubject<AuthInfo> = new BehaviorSubject<AuthInfo>(AuthService.UNKNOWN_USER);
 
 
-  constructor(private auth: AngularFireAuth, private router: Router) {
+  constructor(private auth:AngularFireAuth, private router:Router) {
 
   }
 
@@ -21,6 +21,7 @@ export class AuthService {
 
 
     login(email, password):Observable<FirebaseAuthState> {
+
         return this.fromFirebaseAuthPromise(this.auth.login({email, password}));
     }
 
@@ -37,7 +38,7 @@ export class AuthService {
      * */
 
     fromFirebaseAuthPromise(promise):Observable<any> {
-
+        console.log("reached here too too");
         const subject = new Subject<any>();
 
         promise
