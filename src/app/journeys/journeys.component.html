@@ -8,9 +8,10 @@
 
 <table>
     <tbody>
-	test - {{journeys}}
-    <tr *ngFor="let journey of journeys | async">
-        <td>test {{journey.trip_title}} </td>
+    <tr *ngFor="let journey of allJourneys">
+    	<td>{{ journey.company_name }}</td>
+        <td>{{ journey.trip_title }} </td>
+        <td>{{ journey.depart_date }}</td>
     </tr>
     </tbody>
 </table>

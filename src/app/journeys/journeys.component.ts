@@ -5,7 +5,7 @@ import { Journey } from '../shared/models/journey';
 
 @Component({
   // selector: 'app-journeys',
-  // selector: 'journey-list',
+  selector: 'journey-list',
   templateUrl: './journeys.component.html',
   styleUrls: ['./journeys.component.scss']
 })
@@ -25,9 +25,13 @@ export class JourneysComponent implements OnInit {
 
   ngOnInit() {
   	this.journeysService.findAllJourneys()
-  		.do(console.log)
+  		// .do(console.log)
   		.subscribe(
-  			journeys => this.allJourneys = this.filtered = journeys
+  			journeys => {
+          console.log(journeys);
+          this.allJourneys = this.filtered = journeys;  
+        }
+        
   		)
 
   }

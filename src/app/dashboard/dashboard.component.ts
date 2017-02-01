@@ -13,22 +13,28 @@ export class DashboardComponent implements OnInit {
 
   constructor(public af: AngularFire, public router: Router) { 
   	
-  	this.af.auth.subscribe(auth => {
-  		// console.log(auth.uid)	
-  		this.user = auth;
+  	// this.af.auth.subscribe(auth => {
+  	// 	// console.log(auth.uid)	
+  	// 	this.user = auth;
 
-  		if (auth){
-  			console.log(auth);	
-  			// get user profile
-  			// update menu link
-  		}else{
-  			// redirect to login page
-  		}
-  	});
+  	// 	if (auth){
+  	// 		console.log(auth);	
+  	// 		// get user profile
+  	// 		// update menu link
+  	// 	}else{
+  	// 		// redirect to login page
+  	// 	}
+  	// });
+
+  	
   }
 
 	ngOnInit() {
 	}
+
+	login() {
+	    this.af.auth.login();
+	  }
 
   	logout() {
         this.af.auth.logout();
