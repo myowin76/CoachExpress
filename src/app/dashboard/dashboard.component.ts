@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFire } from 'angularfire2';
-import { Router } from "@angular/router";
+// import { AngularFire } from 'angularfire2';
+// import { Router } from "@angular/router";
+
+import { JourneysService } from '../shared/models/journeys.service';
+import { Journey } from '../shared/models/journey';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,7 +14,10 @@ export class DashboardComponent implements OnInit {
 
 	user = {};
 
-  constructor(public af: AngularFire, public router: Router) { 
+  allJourneys: Journey[];
+  filtered: Journey[];
+
+  constructor(private journeysService: JourneysService) { 
   	
   	// this.af.auth.subscribe(auth => {
   	// 	// console.log(auth.uid)	
@@ -26,24 +32,36 @@ export class DashboardComponent implements OnInit {
   	// 	}
   	// });
 
-  	
+
   }
 
 	ngOnInit() {
+
+    this.journeysService.findAllJourneys()
+      // .do(console.log)
+      .subscribe(
+        journeys => {
+          console.log(journeys);
+          this.allJourneys = this.filtered = journeys;  
+        }
+        
+      )
 	}
 
-	login() {
-	    this.af.auth.login();
-	  }
+  search(search: string){
+    
+    this.filtered = this.allJourneys.filter(journey => journey.trip_title.includes(search) );
 
-  	logout() {
-        this.af.auth.logout();
-        this.router.navigate(['/dashboard']);
+  }
 
-    }
+	// login() {
+	//     this.af.auth.login();
+	//   }
 
-    toggleSignIn() {
+ //  	logout() {
+ //        this.af.auth.logout();
+ //        this.router.navigate(['/dashboard']);
 
-    }
+ //    }
 
 }

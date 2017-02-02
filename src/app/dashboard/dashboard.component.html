@@ -2,5 +2,5 @@
   dashboard works!
 
 </p>
-
-<journey-list></journey-list>
+<input class="search-bar" placeholder="Search"(keyup)="search(input.value)" #input>
+<journey-list *ngIf="filtered" [journeys]="filtered"></journey-list>

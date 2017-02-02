@@ -2,13 +2,13 @@
   journeys works!
 </p>
 
-<input class="search-bar" placeholder="Search"(keyup)="search(input.value)" #input>
+<!-- <input class="search-bar" placeholder="Search"(keyup)="search(input.value)" #input> -->
 
 <!-- <journeys-list *ngIf="filtered" [journeys]="filtered"></journeys-list> -->
 
 <table>
     <tbody>
-    <tr *ngFor="let journey of allJourneys">
+    <tr *ngFor="let journey of journeys">
     	<td>{{ journey.company_name }}</td>
         <td>{{ journey.trip_title }} </td>
         <td>{{ journey.depart_date }}</td>
