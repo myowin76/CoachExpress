@@ -16,9 +16,9 @@ export class DashboardComponent implements OnInit {
   	this.af.auth.subscribe(auth => {
   		// console.log(auth.uid)	
   		this.user = auth;
-
+console.log(this.user);  
   		if (auth){
-  			console.log(auth);	
+  			
   			// get user profile
   			// update menu link
   		}else{
@@ -27,7 +27,10 @@ export class DashboardComponent implements OnInit {
   	});
   }
 
+
+
 	ngOnInit() {
+    
 	}
 
   	logout() {

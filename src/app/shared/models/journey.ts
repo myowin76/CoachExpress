@@ -8,9 +8,7 @@ export class Journey {
         public trip_id:string,
         public trip_title:string
         
-        ){
-        
-    } 
+        ){} 
 
 
     // get isBeginner() {
