@@ -1,41 +1,37 @@
-import { Component, OnInit, Input, EventEmitter, Output} from '@angular/core';
+import {Component, OnInit, Input, EventEmitter, Output} from '@angular/core';
 
-import { JourneysService } from '../shared/models/journeys.service';
+// import { JourneysService } from '../shared/models/journeys.service';
+import { JourneyFormComponent } from '../journey-form/journey-form.component';
 import { Journey } from '../shared/models/journey';
 
 @Component({
   // selector: 'app-journeys',
-  // selector: 'journey-list',
+  selector: 'journey-list',
   templateUrl: './journeys.component.html',
   styleUrls: ['./journeys.component.scss']
 })
 
-// @input()
+
 export class JourneysComponent implements OnInit {
-	// @Input()
-	// journeys: Journey[];
-	// @Output('journeys')
+	@Input()
+	journeys: Journey[];
 
-	allJourneys: Journey[];
-	filtered: Journey[];
+	@Output('journey')
+  journeyEmitter = new EventEmitter<Journey>();
 
-	constructor(private journeysService: JourneysService){
+  selectedJourney: Journey;
+
+	constructor(){
 
 	}
 
   ngOnInit() {
-  	this.journeysService.findAllJourneys()
-  		.do(console.log)
-  		.subscribe(
-  			journeys => this.allJourneys = this.filtered = journeys
-  		)
 
   }
 
-  search(search: string){
-  	
-  	this.filtered = this.allJourneys.filter(journey => journey.trip_title.includes(search) );
-
+  onSelect(journey:Journey) {
+      this.selectedJourney = journey;
+      this.journeyEmitter.emit(journey);
   }
 
 }

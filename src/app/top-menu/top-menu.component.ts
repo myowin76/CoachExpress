@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../shared/security/auth.service";
 import { AuthInfo } from "../shared/security/auth-info"; 
 
+
+
 @Component({
   selector: 'top-menu',
   templateUrl: './top-menu.component.html',
@@ -14,7 +16,13 @@ export class TopMenuComponent implements OnInit {
   constructor(private authService:AuthService) { }
 
   ngOnInit() {
-  	this.authService.authInfo$.subscribe(authInfo =>  this.authInfo = authInfo);
+  	this.authService.authInfo$.subscribe(authInfo =>  {
+        this.authInfo = authInfo;
+
+
+    }); 
+  // console.log(this.authInfo);
+    // console.log("user Info"  + AuthInfo);
   }
 
   logout() {

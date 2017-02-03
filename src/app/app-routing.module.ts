@@ -28,8 +28,7 @@ const appRoutes: Routes = [
   },
   {
       path: '',
-      redirectTo: 'dashboard',
-      pathMatch: 'full'
+      component: LoginComponent
   },
   {
       path: '**',

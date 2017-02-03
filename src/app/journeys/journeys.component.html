@@ -2,16 +2,20 @@
   journeys works!
 </p>
 
-<input class="search-bar" placeholder="Search"(keyup)="search(input.value)" #input>
+<!-- <input class="search-bar" placeholder="Search"(keyup)="search(input.value)" #input> -->
 
 <!-- <journeys-list *ngIf="filtered" [journeys]="filtered"></journeys-list> -->
 
 <table>
     <tbody>
-	test - {{journeys}}
-    <tr *ngFor="let journey of journeys | async">
-        <td>test {{journey.trip_title}} </td>
+    <tr *ngFor="let journey of journeys" 
+    	[class.selected] = "journey === selectedJourney"
+    	(click)="onSelect(journey)">
+    	<td>{{ journey.company_name }}</td>
+        <td>{{ journey.trip_title }} </td>
+        <td>{{ journey.depart_date }}</td>
     </tr>
     </tbody>
 </table>
-
+<!-- model -->
+<journey-form [journey]="selectedJourney"></journey-form>

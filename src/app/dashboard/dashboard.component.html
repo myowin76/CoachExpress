@@ -1,5 +1,5 @@
 <p>
   dashboard works!
-
-  <!-- {{user.auth.email}} -->
 </p>
+<input class="search-bar" placeholder="Search"(keyup)="search(input.value)" #input>
+<journey-list *ngIf="filtered" [journeys]="filtered"></journey-list>
