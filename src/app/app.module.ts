@@ -25,6 +25,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { TopMenuComponent } from './top-menu/top-menu.component';
 import { LoginComponent } from './login/login.component';
 import { JourneyFormComponent } from './journey-form/journey-form.component';
+import { CompaniesComponent } from './companies/companies.component';
+import { NewJourneyComponent } from './new-journey/new-journey.component';
+import { NewJourneyFormComponent } from './new-journey-form/new-journey-form.component';
 
 
 @NgModule({
@@ -36,7 +39,11 @@ import { JourneyFormComponent } from './journey-form/journey-form.component';
     DashboardComponent,
     TopMenuComponent,
     LoginComponent,
-    JourneyFormComponent
+    JourneyFormComponent,
+    JourneyDetailsComponent,
+    CompaniesComponent,
+    NewJourneyComponent,
+    NewJourneyFormComponent
   ],
   imports: [
     BrowserModule,

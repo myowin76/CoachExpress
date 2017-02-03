@@ -1,9 +1,12 @@
 import { Injectable, Inject } from '@angular/core';
 import { Observable, Subject } from "rxjs/Rx";
 import { Journey } from "./journey";
+import { Company } from "./company";
 import { AngularFireDatabase, FirebaseRef } from "angularfire2";
 import { Http } from "@angular/http";
 import { firebaseConfig } from "../../../environments/firebase.config";
+import {FirebaseListFactoryOpts} from "angularfire2/interfaces";
+
 
 
 @Injectable()
@@ -26,6 +29,65 @@ export class JourneysService {
             .map(Journey.fromJsonList);
 
     }
+
+    //     
+
+    // findJourneysByDate
+    findJourneysByDate(date:string): Observable<Journey> {
+        return this.db.list('journeys', {
+            query: {
+                orderByChild: 'depart_date',
+                equalTo: date
+            }
+        })
+        .map(results => results[0]);
+    }
+
+    findCompanyById(Id:string): Observable<Company> {
+        return this.db.list('companies', {
+            query: {
+                orderByChild: 'name',
+                equalTo: Id
+            }
+        })
+        .map(results => results[0]);
+    }
+
+    findJourneysByCompany(companyId:string): Observable<Journey[]> {
+        return this.db.list('journeys', {
+            query: {
+                orderByChild: 'company_id',
+                equalTo: companyId
+            }
+        })
+        .do(console.log);
+    }
+
+
+    // find journeys per company
+    findJourneyKeysPerCompany(company_id:string,
+                               query: FirebaseListFactoryOpts = {}): Observable<string[]> {
+        return this.findCompanyById(company_id)
+            .do(val => console.log("company",val))
+            .filter(company => !!company)
+            .switchMap(company => this.db.list(`companyJourneys/${company.$key}`,query))
+            .map( lspc => lspc.map(lpc => lpc.$key) );
+    }
+    
+    // findJourneyById(id:string):Observable<Journey> {
+        
+    //     return this.findAllJourneys()
+    //         .do(val => console.log("journey",val))
+    //         // .filter(course => !!course)
+    //         .switchMap(course => this.db.list(`lessonsPerCourse/${course.$key}`,query))
+    //         .map( lspc => lspc.map(lpc => lpc.$key) );
+        
+    // }
+
+    
+
+    
+    // findJourneysByCompany
 
     // findLessonByCompany(url:string):Observable<Journey> {
     //     return this.db.list('journeys', {
@@ -70,61 +132,61 @@ export class JourneysService {
 
     // }
 
-    // createNewLesson(courseId:string, lesson:any): Observable<any> {
+    createNewJourney(companyId:string, journey:any): Observable<any> {
 
-    //     const lessonToSave = Object.assign({}, lesson, {courseId});
+        const journeyToSave = Object.assign({}, journey, {companyId});
 
-    //     const newLessonKey = this.sdkDb.child('lessons').push().key;
+        const newJourneyKey = this.sdkDb.child('journeys').push().key;
 
-    //     let dataToSave = {};
+        let dataToSave = {};
 
-    //     dataToSave["lessons/" + newLessonKey] = lessonToSave;
-    //     dataToSave[`lessonsPerCourse/${courseId}/${newLessonKey}`] = true;
-
-
-    //     return this.firebaseUpdate(dataToSave);
-    // }
-
-    // firebaseUpdate(dataToSave) {
-    //     const subject = new Subject();
-
-    //     this.sdkDb.update(dataToSave)
-    //         .then(
-    //             val => {
-    //                 subject.next(val);
-    //                 subject.complete();
-
-    //             },
-    //             err => {
-    //                 subject.error(err);
-    //                 subject.complete();
-    //             }
-    //         );
-
-    //     return subject.asObservable();
-    // }
+        dataToSave["journeys/" + newJourneyKey] = journeyToSave;
+        dataToSave[`companyJourneys/${companyId}/${newJourneyKey}`] = true;
 
 
-    // saveLesson(lessonId:string, lesson): Observable<any> {
+        return this.firebaseUpdate(dataToSave);
+    }
 
-    //     const lessonToSave = Object.assign({}, lesson);
-    //     delete(lessonToSave.$key);
+    firebaseUpdate(dataToSave) {
+        const subject = new Subject();
 
-    //     let dataToSave = {};
-    //     dataToSave[`lessons/${lessonId}`] = lessonToSave;
+        this.sdkDb.update(dataToSave)
+            .then(
+                val => {
+                    subject.next(val);
+                    subject.complete();
 
-    //     return this.firebaseUpdate(dataToSave);
+                },
+                err => {
+                    subject.error(err);
+                    subject.complete();
+                }
+            );
+
+        return subject.asObservable();
+    }
 
 
-    // }
+    saveLesson(journeyId:string, journey): Observable<any> {
+
+        const journeyToSave = Object.assign({}, journey);
+        delete(journeyToSave.$key);
+
+        let dataToSave = {};
+        dataToSave[`journey/${journeyId}`] = journeyToSave;
+
+        return this.firebaseUpdate(dataToSave);
 
 
-    // deleteLesson(lessonId:string): Observable<any> {
+    }
 
-    //     const url = firebaseConfig.databaseURL + '/lessons/' + lessonId + '.json';
 
-    //     return this.http.delete(url);
-    // }
+    deleteLesson(journeyId:string): Observable<any> {
+
+        const url = firebaseConfig.databaseURL + '/journeys/' + journeyId + '.json';
+
+        return this.http.delete(url);
+    }
 
 
     // requestLessonDeletion(lessonId:string, courseId:string) {

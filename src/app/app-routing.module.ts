@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { TripsComponent }  from './trips/trips.component';
 import { JourneysComponent }  from './journeys/journeys.component';
+import { JourneyDetailsComponent }  from './journey-details/journey-details.component';
+import { NewJourneyComponent }  from './new-journey/new-journey.component';
 import { DashboardComponent }  from './dashboard/dashboard.component';
 
 import { LoginComponent } from "./login/login.component";
@@ -20,8 +22,26 @@ const appRoutes: Routes = [
   },
   {
     path: 'journeys',
-    component: JourneysComponent
+      children: [
+          {
+              path: '',
+              component: JourneysComponent
+          },
+          {
+              path: 'new',
+              component: NewJourneyComponent
+          }
+      ]
   },
+  {
+      path: 'journey/:id',
+      children: [
+          {
+              path: '',
+              component: JourneyDetailsComponent
+          }
+      ]
+    },
   {
       'path': 'login',
       component: LoginComponent

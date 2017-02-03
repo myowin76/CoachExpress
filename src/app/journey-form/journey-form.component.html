@@ -1,8 +1,9 @@
 <div *ngIf="journey">
   <h2>{{journey.trip_title}} details!</h2>
-  <div><label>id: </label>{{journey.id}}</div>
+  <div><label>id: </label>{{journey.$key}}</div>
   <div>
     <label>name: </label>
-    <input [(ngModel)]="journey.depart_date" placeholder="company_name"/>
+    <input [ngModel]="journey.depart_date" placeholder="company_name"/>
+    <input type="submit" value="save" (click)="save">
   </div>
 </div>

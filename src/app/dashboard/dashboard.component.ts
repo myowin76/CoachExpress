@@ -42,7 +42,7 @@ export class DashboardComponent implements OnInit {
 
 	ngOnInit() {
 
-    this.journeysService.findAllJourneys()
+    this.journeysService.findJourneysByCompany('-KaiKx5S3VfhYnX-tHt9')
       // .do(console.log)
       .subscribe(
         journeys => {

@@ -34,4 +34,7 @@ export class JourneysComponent implements OnInit {
       this.journeyEmitter.emit(journey);
   }
 
+  // gotoDetail(): void {
+  //   this.router.navigate(['/detail', this.selectedHero.id]);
+  // }
 }

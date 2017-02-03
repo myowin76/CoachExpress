@@ -1,0 +1,34 @@
+<p>
+  new-journey-form works!
+</p>
+<form [formGroup]="form" autocomplete="off" novalidate class="new-journey-form">
+
+    
+        <div class="form-field">
+            <label>Date:</label>
+            <input name="depart_date" formControlName="depart_date">
+            <div class="field-error-message"
+                 *ngIf="isErrorVisible('depart_date','required')">field is mandatory</div>
+        </div>
+        <div class="form-field">
+            <label>Time:</label>
+            <input name="depart_time" formControlName="depart_time">
+            <div class="field-error-message" *ngIf="isErrorVisible('depart_time','required')">field is mandatory</div>
+        </div>
+        <!-- <div class="form-field">
+            <label>Company:</label>
+            <input name="company" formControlName="company_id">
+            <div class="field-error-message" *ngIf="isErrorVisible('company','required')">field is mandatory</div>
+        </div> -->
+        <div class="form-field">
+            <label>Trip:</label>
+            <input name="trip" formControlName="trip_id" value="-KaTvnD-g8F2kAqBSX7V">
+            
+        </div>
+        
+        <div class="form-field">
+            <label>Note:</label>
+            <textarea name="note" formControlName="note"></textarea>
+        </div>
+
+</form>

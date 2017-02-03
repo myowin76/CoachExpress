@@ -5,13 +5,17 @@
 <!-- <input class="search-bar" placeholder="Search"(keyup)="search(input.value)" #input> -->
 
 <!-- <journeys-list *ngIf="filtered" [journeys]="filtered"></journeys-list> -->
+<!-- [routerLink]="['/journey', journey.$key]" -->
 
 <table>
     <tbody>
     <tr *ngFor="let journey of journeys" 
+    	
     	[class.selected] = "journey === selectedJourney"
     	(click)="onSelect(journey)">
-    	<td>{{ journey.company_name }}</td>
+        <td>{{ journey.$key }}</td>
+    	<td>
+    		{{ journey.company_name }}</td>
         <td>{{ journey.trip_title }} </td>
         <td>{{ journey.depart_date }}</td>
     </tr>

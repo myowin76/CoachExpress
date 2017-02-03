@@ -1,0 +1,8 @@
+<p>
+  new-journey works!
+</p>
+<!-- <journey-form #form></journey-form> -->
+<new-journey-form #form></new-journey-form>
+
+<button [disabled]="!form.valid"
+        (click)="save(form)">Save New Journey</button>
