@@ -27,6 +27,7 @@ export class JourneyDetailsComponent implements OnInit {
   		.switchMap(params => {
 
             const Id = params['id'];
+            // console.log(Id);
             
             return this.journeysService.findJourneyById(Id);
         })
@@ -34,6 +35,7 @@ export class JourneyDetailsComponent implements OnInit {
         		this.journey = journey
         		console.log(this.journey);	
         });
+        
   }
 
 }

@@ -16,13 +16,24 @@
             <div class="field-error-message" *ngIf="isErrorVisible('depart_time','required')">field is mandatory</div>
         </div>
         <!-- <div class="form-field">
-            <label>Company:</label>
-            <input name="company" formControlName="company_id">
+            <label>Company Id:</label>
+            <input name="company" formControlName="company_id" value="-KaiKx5S3VfhYnX-tHt9">
             <div class="field-error-message" *ngIf="isErrorVisible('company','required')">field is mandatory</div>
         </div> -->
         <div class="form-field">
+            <label>Company Name:</label>
+
+            <input name="company_name" formControlName="company_name">
+            <div class="field-error-message" *ngIf="isErrorVisible('company_name','required')">field is mandatory</div>
+        </div>
+        <div class="form-field">
             <label>Trip:</label>
-            <input name="trip" formControlName="trip_id" value="-KaTvnD-g8F2kAqBSX7V">
+            <!-- <input name="trip" formControlName="trip_id" value="-KaTvnD-g8F2kAqBSX7V"> -->
+            <select name="trips" formControlName="trip_id" >
+                <option  *ngFor="let trip of trips" [ngValue]="trip.$key" >
+                {{trip.title}}
+                </option>
+            </select>
             
         </div>
         

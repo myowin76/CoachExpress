@@ -14,6 +14,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { AuthService } from "./shared/security/auth.service";
 import { AuthGuard } from "./shared/security/auth.guard";
 import { JourneysService } from "./shared/models/journeys.service";
+import { TripsService } from "./shared/models/trips.service";
 
 import { TripsComponent }  from './trips/trips.component';
 import { JourneysComponent }  from './journeys/journeys.component';
@@ -53,7 +54,7 @@ import { NewJourneyFormComponent } from './new-journey-form/new-journey-form.com
     ReactiveFormsModule,
     AngularFireModule.initializeApp(firebaseConfig, authConfig)
   ],
-  providers: [JourneysService, AuthService, AuthGuard],
+  providers: [JourneysService, TripsService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

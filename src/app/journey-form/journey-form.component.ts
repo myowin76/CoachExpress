@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Journey } from '../shared/models/journey';
 
+
 @Component({
   selector: 'journey-form',
   templateUrl: './journey-form.component.html',
@@ -14,6 +15,9 @@ export class JourneyFormComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
+  	
   }
+
 
 }

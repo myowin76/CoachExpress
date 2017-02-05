@@ -1,6 +1,9 @@
 import {Component, OnInit, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
+import { Trip } from '../shared/models/trip';
+import { TripsService } from '../shared/models/trips.service';
+
 @Component({
   selector: 'new-journey-form',
   templateUrl: './new-journey-form.component.html',
@@ -9,16 +12,17 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class NewJourneyFormComponent implements OnInit {
 
   form:FormGroup;
+  trips: Trip[];
 
     @Input()
     initialValue:any;
 
-    constructor(private fb:FormBuilder) {
+    constructor(private fb:FormBuilder, private tripsService: TripsService) {
 
         this.form = this.fb.group({
             depart_date: ['',Validators.required],
             depart_time: ['',Validators.required],
-            company_id: [''],
+            company_name: [''],
             trip_id: [''],
             note: ['']
         });
@@ -33,8 +37,15 @@ export class NewJourneyFormComponent implements OnInit {
         }
     }
 
-     ngOnInit() {
-
+     ngOnInit() {    
+         this.tripsService.findAllTrips()
+          .subscribe(
+            trips => {
+              // console.log(trips);
+              this.trips = trips;  
+            }
+            
+          );
     }
 
 

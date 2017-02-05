@@ -43,14 +43,16 @@ export class JourneysService {
         .map(results => results[0]);
     }
 
+    findJourneyById(Id:string): Observable<Journey> {
+        return this.db.object('journeys/'+Id)
+        // .do(console.log)
+        // .map(results => results[0]);
+    }
+
     findCompanyById(Id:string): Observable<Company> {
-        return this.db.list('companies', {
-            query: {
-                orderByChild: 'name',
-                equalTo: Id
-            }
-        })
-        .map(results => results[0]);
+        return this.db.object('companies/'+Id)
+        .do(console.log);
+        // .map(results => results[0]);
     }
 
     findJourneysByCompany(companyId:string): Observable<Journey[]> {
@@ -63,85 +65,53 @@ export class JourneysService {
         .do(console.log);
     }
 
+    // 
+    findJourneysByDateTime(date:string): Observable<Journey[]> {
+        return this.db.list('journeys', {
+            query: {
+                orderByChild: 'date',
+                equalTo: date
+            }
+        })
+        .do(console.log);
+    }
+
 
     // find journeys per company
-    findJourneyKeysPerCompany(company_id:string,
-                               query: FirebaseListFactoryOpts = {}): Observable<string[]> {
-        return this.findCompanyById(company_id)
-            .do(val => console.log("company",val))
-            .filter(company => !!company)
-            .switchMap(company => this.db.list(`companyJourneys/${company.$key}`,query))
-            .map( lspc => lspc.map(lpc => lpc.$key) );
+    findJourneyKeysPerCompany(company_id:string): Observable<string[]> {
+        // return this.findCompanyById(company_id)
+        //     .do(val => console.log("company1",val))
+        //     .filter(company => !!company)
+        //     .switchMap(company => this.db.list(`companyJourneys/${company.$key}`,query))
+        //     .map( lspc => lspc.map(lpc => lpc.$key) );
+
+        return this.db.list('company-journeys/' + company_id)
+            .map(lspc => lspc.map(lpc => lpc.$key))
+            // .map(lpc => lpc)
+        // .do(console.log);
+    }
+
+    findJourneysForJourneyKeys(journeyKeys$: Observable<string[]>) :Observable<Journey[]> {
+        return journeyKeys$
+            .map(lspc => lspc.map(journeyKeys$ => this.db.object('journeys/' + journeyKeys$)) )
+            .flatMap(fbojs => Observable.combineLatest(fbojs) )
+
     }
     
-    // findJourneyById(id:string):Observable<Journey> {
-        
-    //     return this.findAllJourneys()
-    //         .do(val => console.log("journey",val))
-    //         // .filter(course => !!course)
-    //         .switchMap(course => this.db.list(`lessonsPerCourse/${course.$key}`,query))
-    //         .map( lspc => lspc.map(lpc => lpc.$key) );
-        
-    // }
+     findAllJourneysForCompany(company_id:string):Observable<Journey[]> {
+        return this.findJourneysForJourneyKeys(this.findJourneyKeysPerCompany(company_id));
+    }
 
-    
+    createNewJourney(company_id:string, journey:any): Observable<any> {
 
-    
-    // findJourneysByCompany
-
-    // findLessonByCompany(url:string):Observable<Journey> {
-    //     return this.db.list('journeys', {
-    //         query: {
-    //             orderByChild: 'company_id',
-    //             equalTo: company_id
-    //         }
-    //     })
-    //     .filter(results => results && results.length > 0)
-    //     .map(results => Journey.fromJson(results[0]))
-    //     .do(console.log);
-    // }
-
-
-    // loadNextJourney(tripId:string, journeyId:string):Observable<Journey> {
-    //     return this.db.list(`journeyPerCompany/${companyId}`, {
-    //         query: {
-    //             orderByKey:true,
-    //             startAt: journeyId,
-    //             limitToFirst: 2
-    //         }
-    //     })
-    //     .filter(results => results && results.length > 0) 
-    //     .map(results => results[1].$key)
-    //     .switchMap(journeyId => this.db.object(`journeys/${journeyId}`))
-    //     .map(Journey.fromJson);
-    // }
-
-
-    // loadPreviousLesson(courseId:string, lessonId:string):Observable<Journey> {
-    //     return this.db.list(`lessonsPerCourse/${courseId}`, {
-    //         query: {
-    //             orderByKey:true,
-    //             endAt: lessonId,
-    //             limitToLast: 2
-    //         }
-    //     })
-    //     .filter(results => results && results.length > 0)
-    //     .map(results => results[0].$key)
-    //     .switchMap(lessonId => this.db.object(`lessons/${lessonId}`))
-    //     .map(Journey.fromJson);
-
-    // }
-
-    createNewJourney(companyId:string, journey:any): Observable<any> {
-
-        const journeyToSave = Object.assign({}, journey, {companyId});
+        const journeyToSave = Object.assign({}, journey, {company_id});
 
         const newJourneyKey = this.sdkDb.child('journeys').push().key;
 
         let dataToSave = {};
 
         dataToSave["journeys/" + newJourneyKey] = journeyToSave;
-        dataToSave[`companyJourneys/${companyId}/${newJourneyKey}`] = true;
+        dataToSave[`company-journeys/${company_id}/${newJourneyKey}`] = true;
 
 
         return this.firebaseUpdate(dataToSave);

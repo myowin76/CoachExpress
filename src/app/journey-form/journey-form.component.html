@@ -2,8 +2,10 @@
   <h2>{{journey.trip_title}} details!</h2>
   <div><label>id: </label>{{journey.$key}}</div>
   <div>
-    <label>name: </label>
-    <input [ngModel]="journey.depart_date" placeholder="company_name"/>
+    <label>Date: </label>
+    <input [ngModel]="journey.depart_date" placeholder="Date"/>
+    <input [ngModel]="journey.depart_time" placeholder="Time"/>
+    <input [ngModel]="journey.company_name" placeholder="Company"/>
     <input type="submit" value="save" (click)="save">
   </div>
 </div>

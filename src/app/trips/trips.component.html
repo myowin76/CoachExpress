@@ -1,4 +1,8 @@
 <p>
   trips works!
 </p>
-
+<ul>
+<li *ngFor="let trip of (trips$ | async)">
+	{{trip.title}}
+</li>
+</ul>

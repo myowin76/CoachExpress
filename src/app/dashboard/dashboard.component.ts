@@ -17,6 +17,7 @@ export class DashboardComponent implements OnInit {
 
   allJourneys: Journey[];
   filtered: Journey[];
+  
 
   constructor(private journeysService: JourneysService) { 
   	
@@ -41,9 +42,8 @@ export class DashboardComponent implements OnInit {
 
 
 	ngOnInit() {
-
-    this.journeysService.findJourneysByCompany('-KaiKx5S3VfhYnX-tHt9')
-      // .do(console.log)
+     
+    this.journeysService.findAllJourneysForCompany('-KaiKfnmWpBYseUOaDxu')
       .subscribe(
         journeys => {
           console.log(journeys);
@@ -51,7 +51,6 @@ export class DashboardComponent implements OnInit {
         }
         
       )
-
 	}
 
   search(search: string){
