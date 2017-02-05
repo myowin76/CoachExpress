@@ -12,8 +12,13 @@ import { AuthGuard } from "./shared/security/auth.guard";
 
 const appRoutes: Routes = [
 
+  
   {
     path: 'dashboard',
+    component: DashboardComponent
+  },
+  {
+    path: ':company_id/dashboard',
     component: DashboardComponent
   },
   {
