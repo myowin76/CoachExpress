@@ -1,8 +1,11 @@
-import {Component, OnInit, Input, EventEmitter, Output} from '@angular/core';
+import {Component, OnInit, ViewChild, Input, EventEmitter, Output} from '@angular/core';
 
-// import { JourneysService } from '../shared/models/journeys.service';
+import { JourneysService } from '../shared/models/journeys.service';
 import { JourneyFormComponent } from '../journey-form/journey-form.component';
 import { Journey } from '../shared/models/journey';
+
+import { ModalDirective } from 'ng2-bootstrap';
+
 
 @Component({
   // selector: 'app-journeys',
@@ -13,6 +16,10 @@ import { Journey } from '../shared/models/journey';
 
 
 export class JourneysComponent implements OnInit {
+
+  @ViewChild('childModal') public childModal: ModalDirective;
+
+
 	@Input()
 	journeys: Journey[];
 
@@ -20,8 +27,15 @@ export class JourneysComponent implements OnInit {
   journeyEmitter = new EventEmitter<Journey>();
 
   selectedJourney: Journey;
+  selectedJourneyId: string;
+  journeyLoaded: boolean = false;
+  // @ViewChild('modal')
+  // modal: any;
 
-	constructor(){
+
+	constructor(
+    private journeysService: JourneysService,
+  ){
 
 	}
 
@@ -29,12 +43,27 @@ export class JourneysComponent implements OnInit {
 
   }
 
-  onSelect(journey:Journey) {
-      this.selectedJourney = journey;
-      this.journeyEmitter.emit(journey);
+  // onSelect(journey:Journey) {
+  //     this.selectedJourney = journey;
+  //     // this.journeyEmitter.emit(journey);
+  //     console.log(this.selectedJourney);
+  // }
+
+  viewJourneyDetails(key:string){
+    this.selectedJourneyId = key;
+
+    this.journeysService.findJourneyById(key)
+      .subscribe(journey => {
+            this.selectedJourney = journey
+            console.log(this.selectedJourney);  
+
+            this.journeyLoaded = true;
+            this.childModal.show();
+        });
+    
   }
 
-  // gotoDetail(): void {
-  //   this.router.navigate(['/detail', this.selectedHero.id]);
-  // }
+  public hideChildModal(): void {
+      this.childModal.hide();
+  }
 }

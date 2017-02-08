@@ -12,7 +12,8 @@
     <tr *ngFor="let journey of journeys" 
     	
     	[class.selected] = "journey === selectedJourney"
-    	(click)="onSelect(journey)">
+    	(click)="viewJourneyDetails(journey.$key)"
+    >
         <td>{{ journey.$key }}</td>
     	<td>
     		{{ journey.company_name }}</td>

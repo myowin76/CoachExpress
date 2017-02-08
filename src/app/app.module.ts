@@ -31,6 +31,9 @@ import { NewJourneyComponent } from './new-journey/new-journey.component';
 import { NewJourneyFormComponent } from './new-journey-form/new-journey-form.component';
 
 
+import { Ng2BootstrapModule } from 'ng2-bootstrap/ng2-bootstrap';
+import { ModalModule } from 'ng2-bootstrap/ng2-bootstrap';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,7 +55,9 @@ import { NewJourneyFormComponent } from './new-journey-form/new-journey-form.com
     HttpModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    AngularFireModule.initializeApp(firebaseConfig, authConfig)
+    AngularFireModule.initializeApp(firebaseConfig, authConfig),
+    Ng2BootstrapModule,
+    ModalModule
   ],
   providers: [JourneysService, TripsService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
