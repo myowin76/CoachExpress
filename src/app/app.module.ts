@@ -33,6 +33,8 @@ import { NewJourneyFormComponent } from './new-journey-form/new-journey-form.com
 
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { ModalModule } from 'ng2-bootstrap';
+import { VehicleComponent } from './vehicle/vehicle.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,9 @@ import { ModalModule } from 'ng2-bootstrap';
     JourneyDetailsComponent,
     CompaniesComponent,
     NewJourneyComponent,
-    NewJourneyFormComponent
+    NewJourneyFormComponent,
+    VehicleComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,

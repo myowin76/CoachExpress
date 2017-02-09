@@ -1,15 +1,17 @@
-<p>
-  dashboard works!
-</p>
+<div class="container">
+	<header>
+		<h2>Dashboard</h2>
+	</header>
 
-<!-- <button routerLink="/journeys/new" [queryParams]="{companyId: (company$ | async)?.$key }">
-    New Journey
-</button>
- -->
+	<!-- <button routerLink="/journeys/new" [queryParams]="{companyId: (company$ | async)?.$key }">
+	    New Journey
+	</button>
+	 -->
 
-<button (click)="new1.hidden = !new1.hidden">New Journey</button>
+	<button (click)="new1.hidden = !new1.hidden">New Journey</button>
 
-<input class="search-bar" placeholder="Search"(keyup)="search(input.value)" #input>
-<journey-list *ngIf="filtered" [journeys]="filtered"></journey-list>
+	<input class="search-bar" placeholder="Search"(keyup)="search(input.value)" #input>
+	<journey-list *ngIf="filtered" [journeys]="filtered"></journey-list>
 
-<new-journey #new1></new-journey>
+	<!-- <new-journey #new1></new-journey> -->
+</div>
