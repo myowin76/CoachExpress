@@ -1,8 +1,34 @@
-<nav>
-	<a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
-	<a routerLink="/trips">Trips</a>
-	<a routerLink="/journeys">Journeys</a>
-	<a routerLinkActive="menu-active" routerLink="login"
+<div class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Project name</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      
+      <ul class="nav navbar-nav navbar-right">
+        <li class="active">
+        	<a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+        </li>
+        <li>
+        	<a routerLink="/trips">Trips</a>
+        </li>
+        <li>
+	        <a routerLink="/journeys">Journeys</a>
+        </li>
+        <li>
+        	<a routerLinkActive="menu-active" routerLink="login"
                 *ngIf="!authInfo?.isLoggedIn()">Login</a>
-	<a *ngIf="authInfo?.isLoggedIn()" (click)="logout()">Logout</a>
-</nav>
+        </li>
+        <li>
+      		<a *ngIf="authInfo?.isLoggedIn()" (click)="logout()">Logout</a>  	
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

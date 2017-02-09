@@ -9,6 +9,7 @@ import { ModalDirective } from 'ng2-bootstrap';
 
 @Component({
   // selector: 'app-journeys',
+  moduleId: module.id,
   selector: 'journey-list',
   templateUrl: './journeys.component.html',
   styleUrls: ['./journeys.component.scss']
@@ -29,8 +30,9 @@ export class JourneysComponent implements OnInit {
   selectedJourney: Journey;
   selectedJourneyId: string;
   journeyLoaded: boolean = false;
-  // @ViewChild('modal')
-  // modal: any;
+
+  @ViewChild('modal')
+  modal: any;
 
 
 	constructor(

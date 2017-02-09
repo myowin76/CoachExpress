@@ -26,3 +26,31 @@
 </table>
 <!-- model -->
 <journey-form [journey]="selectedJourney"></journey-form>
+
+<div bsModal #childModal="bs-modal" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document"  *ngIf="journeyLoaded">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        
+  <h2>{{selectedJourney.trip_title}} details!</h2>
+  <div><label>id: </label>{{selectedJourney.$key}}</div>
+  <div>
+    <label>Date: </label>
+    <input [ngModel]="selectedJourney.depart_date" placeholder="Date"/>
+    <input [ngModel]="selectedJourney.depart_time" placeholder="Time"/>
+    <input [ngModel]="selectedJourney.company_name" placeholder="Company"/>
+    <input type="submit" value="save" (click)="save">
+  </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
