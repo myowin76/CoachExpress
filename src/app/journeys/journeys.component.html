@@ -33,14 +33,27 @@
 	      <div class="modal-body">
 	        
 			  <h2>{{selectedJourney.trip_title}} details!</h2>
-			  <div><label>id: </label>{{selectedJourney.$key}}</div>
-			  <div>
-			    <label>Date: </label>
-			    <input [ngModel]="selectedJourney.depart_date" placeholder="Date"/>
-			    <input [ngModel]="selectedJourney.depart_time" placeholder="Time"/>
+			  <!-- <div><label>id: </label>{{selectedJourney.$key}}</div> -->
+			  <!-- <div>
+			    
 			    <input [ngModel]="selectedJourney.company_name" placeholder="Company"/>
 			    
-			  </div>
+			  </div> -->
+			  <form ngNoForm method="post">
+				  <div class="form-group">
+	                    <div class="row">
+	                        <div class="col-xs-6">
+	                            <label class="control-label"><i class="fa fa-calendar-o" aria-hidden="true"></i>Time Start</label>
+	                            <input type="text" class="form-control" [(ngModel)]="selectedJourney.depart_date" disabled />
+	                        </div>
+
+	                        <div class="col-xs-6">
+	                            <label class="control-label"><i class="fa fa-calendar-check-o" aria-hidden="true"></i>Time End</label>
+	                            <input type="text" class="form-control" [(ngModel)]="selectedJourney.depart_time" disabled />
+	                        </div>
+	                    </div>
+	                </div>
+	        </form>
 
 	      </div>
 	      <div class="modal-footer">
