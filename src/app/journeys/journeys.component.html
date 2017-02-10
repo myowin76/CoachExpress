@@ -28,16 +28,13 @@
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="hideChildModal()"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+	        <h4 class="modal-title" id="myModalLabel">{{selectedJourney.trip_title}}</h4>
 	      </div>
 	      <div class="modal-body">
 	        
-			  <h2>{{selectedJourney.trip_title}} details!</h2>
 			  <!-- <div><label>id: </label>{{selectedJourney.$key}}</div> -->
 			  <!-- <div>
-			    
-			    <input [ngModel]="selectedJourney.company_name" placeholder="Company"/>
-			    
+			    	    
 			  </div> -->
 			  <form ngNoForm method="post">
 				  <div class="form-group">

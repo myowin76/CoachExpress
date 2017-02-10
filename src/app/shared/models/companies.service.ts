@@ -1,6 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { Observable, Subject } from "rxjs/Rx";
 import { Journey } from "./journey";
+import { Company } from "./company";
 import { AngularFireDatabase, FirebaseRef } from "angularfire2";
 import { Http } from "@angular/http";
 import { firebaseConfig } from "../../../environments/firebase.config";
