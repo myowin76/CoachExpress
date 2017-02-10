@@ -48,6 +48,11 @@
 	                            <label class="control-label"><i class="fa fa-calendar-check-o" aria-hidden="true"></i>Time End</label>
 	                            <input type="text" class="form-control" [(ngModel)]="selectedJourney.depart_time" disabled />
 	                        </div>
+	                        <select [(ngModel)]="selectedJourney.$key">
+  <option *ngFor="let journey of journeys" value= {{journey.key}}>
+     {{journey.$key}}
+  </option>
+</select>
 	                    </div>
 	                </div>
 	        </form>

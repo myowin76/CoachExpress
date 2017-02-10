@@ -1,8 +1,10 @@
 import {Component, OnInit, ViewChild, Input, EventEmitter, Output} from '@angular/core';
 
 import { JourneysService } from '../shared/models/journeys.service';
+
 import { JourneyFormComponent } from '../journey-form/journey-form.component';
 import { Journey } from '../shared/models/journey';
+
 
 import { ModalDirective } from 'ng2-bootstrap';
 
@@ -30,6 +32,7 @@ export class JourneysComponent implements OnInit {
   selectedJourney: Journey;
   selectedJourneyId: string;
   journeyLoaded: boolean = false;
+  
 
   @ViewChild('modal')
   modal: any;
@@ -42,6 +45,8 @@ export class JourneysComponent implements OnInit {
 	}
 
   ngOnInit() {
+
+
 
   }
 

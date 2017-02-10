@@ -6,11 +6,11 @@ import { AngularFireDatabase, FirebaseRef } from "angularfire2";
 import { Vehicle } from "./vehicle";
 
 @Injectable()
-export class VehicleService {
+export class VehiclesService {
 
 	sdkDb:any;
 
-  constructor(private db:AngularFireDatabase, @Inject(FirebaseRef) fb,
+    constructor(private db:AngularFireDatabase, @Inject(FirebaseRef) fb,
                 private http:Http) {
 
         this.sdkDb = fb.database().ref();
@@ -21,21 +21,21 @@ export class VehicleService {
     findAllVehicles():Observable<Vehicle[]> {
 
         return this.db.list('vehicles')
-            // .do(console.log)
+            .do(console.log)
             .map(Vehicle.fromJsonList);
 
     }
 
-    findAvalibleVehicles(on_duty:string):Observable<Vehicle[]> {
+    // findAvalibleVehicles(on_duty:string):Observable<Vehicle[]> {
 
-        return this.db.list('companies', {
-            query: {
-                orderByChild: 'on_duty',
-                equalTo: ! on_duty  //find not on duty
-            }
-        })
-        .map(Vehicle.fromJsonList);
+    //     return this.db.list('vehicles', {
+    //         query: {
+    //             orderByChild: 'on_duty',
+    //             equalTo: ! on_duty  //find not on duty
+    //         }
+    //     })
+    //     .map(Vehicle.fromJsonList);
 
-    }
+    // }
 
 }

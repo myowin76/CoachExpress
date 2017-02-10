@@ -8,7 +8,7 @@ import { firebaseConfig } from "../../../environments/firebase.config";
 
 
 @Injectable()
-export class JourneysService {
+export class CompaniesService {
 
     sdkDb:any;
 

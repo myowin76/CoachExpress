@@ -14,6 +14,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { AuthService } from "./shared/security/auth.service";
 import { AuthGuard } from "./shared/security/auth.guard";
 import { JourneysService } from "./shared/models/journeys.service";
+import { VehiclesService } from "./shared/models/vehicles.service";
 import { TripsService } from "./shared/models/trips.service";
 
 import { TripsComponent }  from './trips/trips.component';
@@ -63,7 +64,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     Ng2BootstrapModule,
     ModalModule.forRoot()
   ],
-  providers: [JourneysService, TripsService, AuthService, AuthGuard],
+  providers: [JourneysService, VehiclesService, TripsService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
