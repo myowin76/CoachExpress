@@ -19,7 +19,7 @@ export class TopMenuComponent implements OnInit {
   	this.authService.authInfo$.subscribe(authInfo =>  {
         this.authInfo = authInfo;
 
-
+        // console.log(this.authInfo);
     }); 
   // console.log(this.authInfo);
     // console.log("user Info"  + AuthInfo);

@@ -1,5 +1,7 @@
 <p>
   login works!
+  <!-- {{ thisUser?.uid }} -->
+  {{ (af.auth | async)?.uid }} 
 </p>
 
 <form autocomplete="off" novalidate class="login-form" [formGroup]="form">

@@ -47,17 +47,14 @@ export class DashboardComponent implements OnInit {
 
 
 	ngOnInit() {
-    // console.log(this.route.params);
 
     this.route.params
     
       .switchMap(params => {
-
             const companyId = params['company_id'];
-            // console.log('ID is' + companyId);
-            
+            console.log('ID is' + companyId);
            return this.journeysService.findAllJourneysForCompany(companyId);
-        })
+      })
       .subscribe(
         journeys => {
           console.log(journeys);
