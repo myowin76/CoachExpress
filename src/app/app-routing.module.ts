@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { TripsComponent }  from './trips/trips.component';
+import { VehiclesComponent }  from './vehicles/vehicles.component';
 import { JourneysComponent }  from './journeys/journeys.component';
 import { JourneyDetailsComponent }  from './journey-details/journey-details.component';
 import { NewJourneyComponent }  from './new-journey/new-journey.component';
@@ -24,6 +25,10 @@ const appRoutes: Routes = [
   {
   	path: 'trips',
   	component: TripsComponent
+  },
+  {
+    path: 'vehicles',
+    component: VehiclesComponent
   },
   {
     path: 'journeys',

@@ -5,6 +5,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { Journey } from '../shared/models/journey';
 import { JourneysService } from '../shared/models/journeys.service';
+import { Vehicle } from '../shared/models/vehicle';
+import { VehiclesService } from '../shared/models/vehicles.service';
+
 
 @Component({
   moduleId: module.id,
@@ -19,10 +22,13 @@ export class DashboardComponent implements OnInit {
 
   allJourneys: Journey[];
   filtered: Journey[];
+
+  availVehicles: Vehicle[];
   
 
   constructor(
     private journeysService: JourneysService,
+    private vehiclesService: VehiclesService,
     private route:ActivatedRoute,
     private router:Router) { 
   	
@@ -64,14 +70,14 @@ export class DashboardComponent implements OnInit {
       )
       
      
-    // this.journeysService.findAllJourneysForCompany('-KaiKfnmWpBYseUOaDxu')
-    //   .subscribe(
-    //     journeys => {
-    //       console.log(journeys);
-    //       this.allJourneys = this.filtered = journeys;  
-    //     }
+    this.vehiclesService.findAllVehicles()
+      .subscribe(
+        vehicles => {
+          console.log('Vehicles' + vehicles);
+          this.availVehicles = vehicles;  
+        }
         
-    //   )
+      )
 	}
 
   search(search: string){

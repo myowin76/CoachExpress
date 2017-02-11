@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Journey } from '../shared/models/journey';
-
+import { ModalDirective } from 'ng2-bootstrap';
 
 @Component({
   selector: 'journey-form',
