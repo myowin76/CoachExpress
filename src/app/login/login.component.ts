@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from "@angular/forms";
-// import {AuthService} from "../shared/security/auth.service";
+import {AuthService} from "../shared/security/auth.service";
 import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
 
 import {Router} from "@angular/router";
@@ -26,11 +26,16 @@ export class LoginComponent implements OnInit {
 
 
 	  // }
-	  constructor(public af: AngularFire) {
+	  constructor(public af: AngularFire, private fb:FormBuilder, private authService: AuthService) {
+	  	    this.form = this.fb.group({
+	          email: ['',Validators.required],
+	          password: ['',Validators.required]
+	      });
 	    this.af.auth.subscribe(auth => console.log(auth));
 	  }
 	  login() {
 	  	    const formValue = this.form.value;
+	  	    console.log(formValue);
 	    this.af.auth.login(formValue.email, formValue.password);
 	  }
 

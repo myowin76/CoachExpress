@@ -8,9 +8,7 @@
 <table class="table">
     <tbody>
     <tr *ngFor="let journey of journeys" 
-    	
     	[class.selected] = "journey === selectedJourney"
-
     	(click)="viewJourneyDetails(journey.$key)"
     >
         <td>{{ journey.$key }}</td>
