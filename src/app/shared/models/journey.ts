@@ -6,6 +6,7 @@ export class Journey {
         public company_name: string,
         public depart_date:string,
         public trip_id:string,
+        public vehicle_id:string,
         public trip_title:string
         
         ){} 
@@ -20,12 +21,13 @@ export class Journey {
         return array.map(Journey.fromJson);
     }
 
-    static fromJson({$key, company_name, depart_date, trip_id, trip_title}):Journey {
+    static fromJson({$key, company_name, depart_date, trip_id, vehicle_id, trip_title}):Journey {
         return new Journey(
             $key,
             company_name,
             depart_date,
             trip_id,
+            vehicle_id,
             trip_title
         );
     }

@@ -1,3 +1,44 @@
-<p>
-  vehicle works!
-</p>
+<div class="container">
+	<h3>Vehicles</h3>
+	<button (click)="showNewMoal()">New</button>
+</div>
+
+<!-- New modal -->
+<div bsModal #newModal="bs-modal" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document" >
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="hideNewModal()"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel">Create New Vehicle</h4>
+	      </div>
+	      <div class="modal-body">
+	        
+				  <form [formGroup]="newForm" autocomplete="off" novalidate class="new-vehicle-form">
+						<div class="form-group">
+	            <div class="row">
+	                <div class="col-xs-6">
+	                    <label class="control-label">Vehicle Number</label>
+	                    <input type="text" class="form-control" name="number" formControlName="number">
+	                    
+	                </div>
+
+	                <div class="col-xs-6">
+	                    <label class="control-label">Vehicle Driver </label>
+	                    <input name="driver" class="form-control" formControlName="driver">
+	                    
+	                </div>
+	                
+	            </div>
+	            </div>
+		        
+
+					</form>
+
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="hideNewModal()">Close</button>
+	        <button type="button" class="btn btn-primary" (click)="save(newForm)">Save changes</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>

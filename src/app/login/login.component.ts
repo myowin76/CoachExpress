@@ -16,22 +16,12 @@ export class LoginComponent implements OnInit {
 	form:FormGroup;
 	thisUser = {};
 
-	  // constructor(private fb:FormBuilder, private authService: AuthService,
-	  //               private router:Router) {
-
-	  //     this.form = this.fb.group({
-	  //         email: ['',Validators.required],
-	  //         password: ['',Validators.required]
-	  //     });
-
-
-	  // }
 	  constructor(public af: AngularFire, private fb:FormBuilder, private authService: AuthService) {
 	  	    this.form = this.fb.group({
 	          email: ['',Validators.required],
 	          password: ['',Validators.required]
 	      });
-	    this.af.auth.subscribe(auth => console.log(auth));
+	    // this.af.auth.subscribe(auth => console.log(auth));
 	  }
 	  login() {
 	  	    const formValue = this.form.value;

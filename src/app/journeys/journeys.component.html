@@ -101,24 +101,25 @@
 	                </div>
 	                
 	            </div>
+	            </div>
 	            <div class="form-group">
 		            <div class="row">
-		                <div class="col-xs-6">
+		                <!-- <div class="col-xs-6">
 		                	<label class="control-label"><i class="fa fa-calendar-check-o" aria-hidden="true"></i>Company Name </label>
 		                	<input name="company_name" class="form-control"  formControlName="company_name">
 		                	
-		                </div>
+		                </div> -->
 		                <div class="col-xs-6">
 		                	<label class="control-label"><i class="fa fa-calendar-check-o" aria-hidden="true"></i>Vehicle </label>
 		                	<select name="trips" class="form-control" formControlName="trip_id" >
-		                <option  *ngFor="let trip of trips" [ngValue]="trip.$key" >
-		                {{trip.title}}
+		                <option  *ngFor="let vehicle of vehicles" [ngValue]="vehicle.$key" >
+		                {{vehicle.number}}
 		                </option>
 		            </select>
 		                </div>
 		            </div>
 		          </div>
-	        	</div>
+	        	
 
 		        
 

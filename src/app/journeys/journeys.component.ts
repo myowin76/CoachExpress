@@ -1,9 +1,11 @@
 import {Component, OnInit, ViewChild, Input, EventEmitter, Output} from '@angular/core';
 
 import { JourneysService } from '../shared/models/journeys.service';
+import { VehiclesService } from '../shared/models/vehicles.service';
 
 import { JourneyFormComponent } from '../journey-form/journey-form.component';
 import { Journey } from '../shared/models/journey';
+import { Vehicle } from '../shared/models/vehicle';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 import { ModalDirective } from 'ng2-bootstrap';
@@ -34,6 +36,7 @@ export class JourneysComponent implements OnInit {
   journeyLoaded: boolean = false;
 
   companyId = '-KaiKfnmWpBYseUOaDxu';
+  vehicles: Vehicle[];
 
   newForm:FormGroup;
   
@@ -44,12 +47,14 @@ export class JourneysComponent implements OnInit {
 
 	constructor(
     private fb:FormBuilder,
-    private journeysService: JourneysService
+    private journeysService: JourneysService,
+    private vehiclesService: VehiclesService
   ){
       this.newForm = this.fb.group({
           depart_date: ['',Validators.required],
           depart_time: ['',Validators.required],
           company_name: [''],
+          vehicle_id: [''],
           trip_id: [''],
           note: ['']
       });
@@ -57,7 +62,12 @@ export class JourneysComponent implements OnInit {
 
   ngOnInit() {
 
-
+    this.vehiclesService.findAllVehicles()
+      .subscribe( vehicles => {
+        this.vehicles = vehicles;
+        console.log('Vehicles ' + vehicles);    
+      })
+    
 
   }
 

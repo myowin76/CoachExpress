@@ -38,4 +38,37 @@ export class VehiclesService {
 
     // }
 
+    createNewVehicle(vehicle:any): Observable<any> {
+
+        const vehicleToSave = Object.assign({}, vehicle);
+
+        const newVehicleKey = this.sdkDb.child('vehicles').push().key;
+
+        let dataToSave = {};
+
+        dataToSave["vehicles/" + newVehicleKey] = vehicleToSave;
+
+
+        return this.firebaseUpdate(dataToSave);
+    }
+
+    firebaseUpdate(dataToSave) {
+        const subject = new Subject();
+
+        this.sdkDb.update(dataToSave)
+            .then(
+                val => {
+                    subject.next(val);
+                    subject.complete();
+
+                },
+                err => {
+                    subject.error(err);
+                    subject.complete();
+                }
+            );
+
+        return subject.asObservable();
+    }
+
 }
