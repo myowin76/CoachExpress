@@ -26,6 +26,12 @@ export class VehiclesService {
 
     }
 
+    findVehicleById(Id:string): Observable<Vehicle> {
+        return this.db.object('vehicles/'+Id)
+        // .do(console.log)
+        // .map(results => results[0]);
+    }
+
     // findAvalibleVehicles(on_duty:string):Observable<Vehicle[]> {
 
     //     return this.db.list('vehicles', {

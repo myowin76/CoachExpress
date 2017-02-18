@@ -1,9 +1,11 @@
 import {Component, OnInit, ViewChild, Input, EventEmitter, Output} from '@angular/core';
 import { VehiclesService } from '../shared/models/vehicles.service';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { Observable } from 'rxjs/Rx';
 import { ModalDirective } from 'ng2-bootstrap';
 
-
+import { Vehicle } from '../shared/models/vehicle';
 
 @Component({
   selector: 'app-vehicle',
@@ -12,8 +14,15 @@ import { ModalDirective } from 'ng2-bootstrap';
 })
 export class VehiclesComponent implements OnInit {
 
+	@ViewChild('childModal') public childModal: ModalDirective;
+
+  vehicles$: Observable<Vehicle[]>
 	newForm:FormGroup;
 	companyId = '-KaiKfnmWpBYseUOaDxu';
+
+	selectedVehicle: Vehicle;
+	selectedVehicleId: string;
+  vehicleLoaded: boolean = false;
   
 
   @ViewChild('newModal') public newModal: ModalDirective;
@@ -29,6 +38,21 @@ export class VehiclesComponent implements OnInit {
     }
 
   ngOnInit() {
+    this.vehicles$ = this.vehiclesService.findAllVehicles();
+  }
+
+  viewVehicleDetails(key:string){
+    this.selectedVehicleId = key;
+
+    this.vehiclesService.findVehicleById(key)
+      .subscribe(vehicle => {
+            this.selectedVehicle = vehicle
+            console.log(this.selectedVehicle);  
+
+            this.vehicleLoaded = true;
+            this.childModal.show();
+        });
+    
   }
 
 
@@ -39,9 +63,9 @@ export class VehiclesComponent implements OnInit {
       this.newModal.hide();
   }
 
-  // public hideChildModal(): void {
-  //     this.childModal.hide();
-  // }
+  public hideChildModal(): void {
+      this.childModal.hide();
+  }
   
 
   save(form) {

@@ -1,7 +1,58 @@
 <div class="container">
 	<h3>Vehicles</h3>
 	<button (click)="showNewMoal()">New</button>
+
+
+	<table class="table">
+	    <tbody>
+	    <tr *ngFor="let vehicle of (vehicles$ | async)" 
+	    	[class.selected] = "vehicle === selectedVehicle"
+	    	(click)="viewVehicleDetails(vehicle.$key)"
+	    >
+	        <td>{{ vehicle.number }}</td>
+	        <td>{{ vehicle.driver }}</td>
+	        <td>{{ vehicle.company_id }}</td>
+	    </tr>
+	    </tbody>
+	</table>
+
 </div>
+
+<!-- Edit Modal -->
+<div bsModal #childModal="bs-modal" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document"  *ngIf="vehicleLoaded">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="hideChildModal()"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">{{selectedVehicle.number}}</h4>
+		      </div>
+		      <div class="modal-body">
+		        
+					  <form ngNoForm method="post">
+						  <div class="form-group">
+		            <div class="row">
+		                <div class="col-xs-6">
+		                    <label class="control-label"><i class="fa fa-calendar-o" aria-hidden="true"></i>Number</label>
+		                    <input type="text" class="form-control" [(ngModel)]="selectedVehicle.number" />
+		                </div>
+		                <div class="col-xs-6">
+	                    <label class="control-label">Vehicle Driver </label>
+	                    <input name="driver" class="form-control" [(ngModel)]="selectedVehicle.driver">
+	                    
+	                </div>
+		                
+		            </div>
+		        	</div>
+			      </form>
+
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="hideChildModal()">Close</button>
+		        <button type="button" class="btn btn-primary" (click)="save">Save changes</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
 
 <!-- New modal -->
 <div bsModal #newModal="bs-modal" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

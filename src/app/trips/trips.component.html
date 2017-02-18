@@ -1,8 +1,82 @@
-<p>
-  trips works!
-</p>
-<ul>
-<li *ngFor="let trip of (trips$ | async)">
-	{{trip.title}}
-</li>
-</ul>
+<div class="container-fluid">
+
+	<button (click)="showNewMoal()">New</button>
+
+	<table class="table">
+	    <tbody>
+	    <tr *ngFor="let trip of (trips$ | async)" 
+	    	[class.selected] = "trip === selectedTrip"
+	    	(click)="viewTripDetails(trip.$key)"
+	    >
+	        <td>{{trip.title}}</td>
+	    </tr>
+	    </tbody>
+	</table>
+	
+
+	<!-- model -->
+
+		<div bsModal #childModal="bs-modal" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document"  *ngIf="tripLoaded">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="hideChildModal()"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">{{selectedTrip.title}}</h4>
+		      </div>
+		      <div class="modal-body">
+		        
+					  <form ngNoForm method="post">
+						  <div class="form-group">
+		            <div class="row">
+		                <div class="col-xs-6">
+		                    <label class="control-label"><i class="fa fa-calendar-o" aria-hidden="true"></i>Title</label>
+		                    <input type="text" class="form-control" [(ngModel)]="selectedTrip.title" />
+		                </div>
+		                
+		            </div>
+		        	</div>
+			      </form>
+
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="hideChildModal()">Close</button>
+		        <button type="button" class="btn btn-primary" (click)="save">Save changes</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+
+	<!-- new modal -->
+	<div bsModal #newModal="bs-modal" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document" >
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="hideNewModal()"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Create New Trip</h4>
+		      </div>
+		      <div class="modal-body">
+		        
+					  <form [formGroup]="newForm" autocomplete="off" novalidate class="new-journey-form">
+					  	<div class="form-group">
+		            <div class="row">
+		                <div class="col-xs-6">
+		                    
+		                    <label class="control-label">Title</label>
+		                    <input type="text" class="form-control" name="title" formControlName="title"/>
+		                </div>      
+		            </div>
+							</div>
+						</form>
+
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="hideNewModal()">Close</button>
+		        <button type="button" class="btn btn-primary" (click)="save(newForm)">Save changes</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+
+</div>

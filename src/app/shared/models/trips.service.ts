@@ -27,6 +27,12 @@ export class TripsService {
 
     }
 
+    findTripById(Id:string): Observable<Trip> {
+        return this.db.object('trips/'+Id)
+        // .do(console.log)
+        // .map(results => results[0]);
+    }
+
     // findCompanyById(Id:string): Observable<User> {
     //     return this.db.list('companies', {
     //         query: {
@@ -45,7 +51,7 @@ export class TripsService {
 
         let dataToSave = {};
 
-        dataToSave["journeys/" + newTripKey] = newTripKey;
+        dataToSave["trips/" + newTripKey] = newTripKey;
 
         return this.firebaseUpdate(dataToSave);
     }
