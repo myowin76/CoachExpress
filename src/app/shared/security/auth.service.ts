@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject, BehaviorSubject } from "rxjs/Rx";
-import { AngularFireAuth, FirebaseAuthState } from "angularfire2";
+import { AngularFire, AngularFireDatabase, AngularFireAuth, FirebaseAuthState } from "angularfire2";
 import { AuthInfo } from "./auth-info";
 import { Router } from "@angular/router";
 
@@ -13,14 +13,14 @@ export class AuthService {
   authInfo$: BehaviorSubject<AuthInfo> = new BehaviorSubject<AuthInfo>(AuthService.UNKNOWN_USER);
 
 
-  constructor(private auth:AngularFireAuth, private router:Router) {
+  constructor(public af: AngularFire, private db:AngularFireDatabase, private auth: AngularFireAuth, private router:Router) {
 
   }
 
 
     login(email, password):Observable<FirebaseAuthState> {
 
-        return this.fromFirebaseAuthPromise(this.auth.login({email, password}));
+        return this.fromFirebaseAuthPromise(this.af.auth.login({email: email, password: password}));
     }
 
     signUp(email, password) {
@@ -40,10 +40,12 @@ export class AuthService {
 
         promise
             .then(res => {
-                    const authInfo = new AuthInfo(this.auth.getAuth().uid);
-                    this.authInfo$.next(authInfo);
-                    subject.next(res);
-                    subject.complete();
+                    this.af.auth.subscribe( user => {
+                      const authInfo = new AuthInfo(user.uid);
+                      this.authInfo$.next(authInfo);
+                      subject.next(res);
+                      subject.complete();  
+                    })
                 },
                 err => {
                     this.authInfo$.error(err);
@@ -56,9 +58,9 @@ export class AuthService {
 
 
     logout() {
-        this.auth.logout();
+        this.af.auth.logout();
         this.authInfo$.next(AuthService.UNKNOWN_USER);
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/login']);
 
     }
 

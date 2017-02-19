@@ -51,7 +51,7 @@ export class TripsService {
 
         let dataToSave = {};
 
-        dataToSave["trips/" + newTripKey] = newTripKey;
+        dataToSave["trips/" + newTripKey] = tripToSave;
 
         return this.firebaseUpdate(dataToSave);
     }

@@ -8,7 +8,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Project name</a>
+      <a class="navbar-brand" href="#">{{profile?.company}}</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       
@@ -24,11 +24,12 @@
         </li>
         <li>
         	<a routerLinkActive="menu-active" routerLink="login"
-                *ngIf="!authInfo?.isLoggedIn()">Login</a>
+                *ngIf="!user">Login</a>
         </li>
         <li>
-      		<a *ngIf="authInfo?.isLoggedIn()" (click)="logout()">Logout</a>  	
+      		<a *ngIf="user" (click)="logout()">Logout</a>  	
         </li>
+        {{email}}
       </ul>
     </div>
   </div>

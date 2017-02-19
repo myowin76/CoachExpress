@@ -13,6 +13,8 @@ import 'rxjs/add/operator/switchMap';
 import { ReactiveFormsModule } from "@angular/forms";
 import { AuthService } from "./shared/security/auth.service";
 import { AuthGuard } from "./shared/security/auth.guard";
+
+import { UsersService } from "./shared/models/users.service";
 import { JourneysService } from "./shared/models/journeys.service";
 import { VehiclesService } from "./shared/models/vehicles.service";
 import { TripsService } from "./shared/models/trips.service";
@@ -36,6 +38,7 @@ import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { ModalModule } from 'ng2-bootstrap';
 import { VehiclesComponent } from './vehicles/vehicles.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { UsersComponent } from './admin/users/users.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +55,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     NewJourneyComponent,
     NewJourneyFormComponent,
     VehiclesComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +68,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     Ng2BootstrapModule,
     ModalModule.forRoot()
   ],
-  providers: [JourneysService, VehiclesService, TripsService, AuthService, AuthGuard],
+  providers: [UsersService, JourneysService, VehiclesService, TripsService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
