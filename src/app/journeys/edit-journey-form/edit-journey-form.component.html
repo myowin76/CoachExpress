@@ -1,0 +1,35 @@
+<p>
+  edit-journey-form works!
+</p>
+<form ngNoForm method="post"  >
+  <div class="form-group">
+    <div class="row">
+        <div class="col-xs-6">
+            <label class="control-label"><i class="fa fa-calendar-o" aria-hidden="true"></i>Time Start</label>
+            <input type="text" class="form-control" [(ngModel)]="selectedJourney.depart_date" />
+        </div>
+
+        <div class="col-xs-6">
+            <label class="control-label"><i class="fa fa-calendar-check-o" aria-hidden="true"></i>Time End</label>
+            <input type="text" class="form-control" [(ngModel)]="selectedJourney.depart_time" />
+        </div>
+        
+    </div>
+	</div>
+	<div class="form-group">
+    <div class="row">
+        <div class="col-xs-6">
+        	<select [(ngModel)]="selectedJourney.$key">
+				  <option *ngFor="let journey of journeys" value= {{journey.key}}>
+				     {{journey.$key}}
+				  </option>
+				</select>
+        </div>
+        <div class="col-xs-6">
+        	<datepicker [(ngModel)]="selectedJourney.depart_date" name="timeStartDate" [showWeeks]="false"></datepicker>
+      
+      <timepicker [(ngModel)]="selectedJourney.depart_time" name="timeStartTime" (change)="changed()" [hourStep]="1" [minuteStep]="15" [showMeridian]="true"></timepicker>
+        </div>
+    </div>
+  </div>
+</form>

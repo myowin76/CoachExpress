@@ -14,7 +14,8 @@
         <td>{{ journey.$key }}</td>
     	<td>
     		{{ journey.company_name }}</td>
-        <td>{{ journey.depart_date }}</td>
+        <!-- <td>{{ journey.depart_date }}</td> -->
+        <td>{{ journey.depart_date | dateFormat | date:'medium' }}</td>
         <!-- <td>{{ journey.company_id }}</td>
         <td>{{ journey.trip_title }} </td> -->
         
@@ -34,41 +35,18 @@
 	      <div class="modal-body">
 	        
 			  <!-- <div><label>id: </label>{{selectedJourney.$key}}</div> -->
+			  <edit-journey-form #editForm [selectedJourney]="selectedJourney"></edit-journey-form>
+					<!--  -->
+			  	
 			  <!-- <div>
 			    	    
 			  </div> -->
-				  <form ngNoForm method="post">
-					  <div class="form-group">
-	            <div class="row">
-	                <div class="col-xs-6">
-	                    <label class="control-label"><i class="fa fa-calendar-o" aria-hidden="true"></i>Time Start</label>
-	                    <input type="text" class="form-control" [(ngModel)]="selectedJourney.depart_date" />
-	                </div>
-
-	                <div class="col-xs-6">
-	                    <label class="control-label"><i class="fa fa-calendar-check-o" aria-hidden="true"></i>Time End</label>
-	                    <input type="text" class="form-control" [(ngModel)]="selectedJourney.depart_time" />
-	                </div>
-	                
-	            </div>
-	        	</div>
-	        	<div class="form-group">
-	            <div class="row">
-	                <div class="col-xs-6">
-	                	<select [(ngModel)]="selectedJourney.$key">
-									  <option *ngFor="let journey of journeys" value= {{journey.key}}>
-									     {{journey.$key}}
-									  </option>
-									</select>
-	                </div>
-	            </div>
-	          </div>
-		      </form>
+				  
 
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="hideChildModal()">Close</button>
-	        <button type="button" class="btn btn-primary" (click)="save">Save changes</button>
+	        
+	        <button type="button" class="btn btn-primary" (click)="update(editForm.value)">Save changes</button>
 	      </div>
 	    </div>
 	  </div>
@@ -84,46 +62,8 @@
 	        <h4 class="modal-title" id="myModalLabel">Create New Journey</h4>
 	      </div>
 	      <div class="modal-body">
-	        
-				  <form [formGroup]="newForm" autocomplete="off" novalidate class="new-journey-form">
-				  	<div class="form-group">
-	            <div class="row">
-	                <div class="col-xs-6">
-	                    <label class="control-label"><i class="fa fa-calendar-o" aria-hidden="true"></i>Date</label>
-	                    <input type="text" class="form-control" name="depart_date" formControlName="depart_date">
-	                    
-	                </div>
-
-	                <div class="col-xs-6">
-	                    <label class="control-label"><i class="fa fa-calendar-check-o" aria-hidden="true"></i>Time </label>
-	                    <input name="depart_time" class="form-control" formControlName="depart_time">
-	                    
-	                </div>
-	                
-	            </div>
-	            </div>
-	            <div class="form-group">
-		            <div class="row">
-		                <!-- <div class="col-xs-6">
-		                	<label class="control-label"><i class="fa fa-calendar-check-o" aria-hidden="true"></i>Company Name </label>
-		                	<input name="company_name" class="form-control"  formControlName="company_name">
-		                	
-		                </div> -->
-		                <div class="col-xs-6">
-		                	<label class="control-label"><i class="fa fa-calendar-check-o" aria-hidden="true"></i>Vehicle </label>
-		                	<select name="trips" class="form-control" formControlName="vehicle_id" >
-		                <option  *ngFor="let vehicle of vehicles" [ngValue]="vehicle.$key" >
-		                {{vehicle.number}}
-		                </option>
-		            </select>
-		                </div>
-		            </div>
-		          </div>
-	        	
-
-		        
-
-		</form>
+	      	<new-journey-form #newForm></new-journey-form>
+	       
 
 	      </div>
 	      <div class="modal-footer">

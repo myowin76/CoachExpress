@@ -6,7 +6,6 @@ import { VehiclesComponent }  from './vehicles/vehicles.component';
 import { JourneysComponent }  from './journeys/journeys.component';
 import { UsersComponent }  from './admin/users/users.component';
 import { JourneyDetailsComponent }  from './journey-details/journey-details.component';
-import { NewJourneyComponent }  from './new-journey/new-journey.component';
 import { DashboardComponent }  from './dashboard/dashboard.component';
 
 import { LoginComponent } from "./login/login.component";
@@ -41,10 +40,6 @@ const appRoutes: Routes = [
           {
               path: '',
               component: JourneysComponent
-          },
-          {
-              path: 'new',
-              component: NewJourneyComponent
           }
       ]
   },

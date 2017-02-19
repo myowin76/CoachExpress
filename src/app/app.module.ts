@@ -28,17 +28,20 @@ import { JourneyDetailsComponent } from './journey-details/journey-details.compo
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TopMenuComponent } from './top-menu/top-menu.component';
 import { LoginComponent } from './login/login.component';
-import { JourneyFormComponent } from './journey-form/journey-form.component';
+// import { JourneyFormComponent } from './journey-form/journey-form.component';
+import { NewJourneyFormComponent } from './journeys/new-journey-form/new-journey-form.component';
+import { EditJourneyFormComponent } from './journeys/edit-journey-form/edit-journey-form.component';
 import { CompaniesComponent } from './companies/companies.component';
-import { NewJourneyComponent } from './new-journey/new-journey.component';
-import { NewJourneyFormComponent } from './new-journey-form/new-journey-form.component';
-
 
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { ModalModule } from 'ng2-bootstrap';
+import { DatepickerModule } from 'ng2-bootstrap';
+import { TimepickerModule } from 'ng2-bootstrap';
 import { VehiclesComponent } from './vehicles/vehicles.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UsersComponent } from './admin/users/users.component';
+import { DateFormatPipe } from './shared/pipes/date-format.pipe';
+
 
 @NgModule({
   declarations: [
@@ -49,14 +52,14 @@ import { UsersComponent } from './admin/users/users.component';
     DashboardComponent,
     TopMenuComponent,
     LoginComponent,
-    JourneyFormComponent,
+    NewJourneyFormComponent,
+    EditJourneyFormComponent,
     JourneyDetailsComponent,
     CompaniesComponent,
-    NewJourneyComponent,
-    NewJourneyFormComponent,
     VehiclesComponent,
     UserProfileComponent,
-    UsersComponent
+    UsersComponent,
+    DateFormatPipe,
   ],
   imports: [
     BrowserModule,
@@ -66,7 +69,9 @@ import { UsersComponent } from './admin/users/users.component';
     ReactiveFormsModule,
     AngularFireModule.initializeApp(firebaseConfig, authConfig),
     Ng2BootstrapModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    TimepickerModule.forRoot(),
+    DatepickerModule.forRoot()
   ],
   providers: [UsersService, JourneysService, VehiclesService, TripsService, AuthService, AuthGuard],
   bootstrap: [AppComponent]

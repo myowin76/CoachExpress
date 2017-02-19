@@ -137,26 +137,26 @@ export class JourneysService {
     }
 
 
-    // saveLesson(journeyId:string, journey): Observable<any> {
+    updateJourney(journeyId:string, journey): Observable<any> {
 
-    //     const journeyToSave = Object.assign({}, journey);
-    //     delete(journeyToSave.$key);
+        const journeyToUpdate = Object.assign({}, journey);
+        delete(journeyToUpdate.$key);
 
-    //     let dataToSave = {};
-    //     dataToSave[`journey/${journeyId}`] = journeyToSave;
+        let dataToSave = {};
+        dataToSave[`journeys/${journeyId}`] = dataToSave;
 
-    //     return this.firebaseUpdate(dataToSave);
-
-
-    // }
+        return this.firebaseUpdate(dataToSave);
 
 
-    // deleteLesson(journeyId:string): Observable<any> {
+    }
 
-    //     const url = firebaseConfig.databaseURL + '/journeys/' + journeyId + '.json';
 
-    //     return this.http.delete(url);
-    // }
+    deleteJourney(journeyId:string): Observable<any> {
+
+        const url = firebaseConfig.databaseURL + '/journeys/' + journeyId + '.json';
+
+        return this.http.delete(url);
+    }
 
 
     // requestLessonDeletion(lessonId:string, courseId:string) {

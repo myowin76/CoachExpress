@@ -14,7 +14,7 @@
       
       <ul class="nav navbar-nav navbar-right">
         <li class="active">
-        	<a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+        	<a *ngIf="user.uid" routerLink="{{profile?.company}}/dashboard" routerLinkActive="active">Dashboard</a>
         </li>
         <li>
         	<a routerLink="/trips">Trips</a>
@@ -24,10 +24,10 @@
         </li>
         <li>
         	<a routerLinkActive="menu-active" routerLink="login"
-                *ngIf="!user">Login</a>
+                *ngIf="!user.uid">Login</a>
         </li>
         <li>
-      		<a *ngIf="user" (click)="logout()">Logout</a>  	
+      		<a *ngIf="user.uid" (click)="logout()">Logout</a>  	
         </li>
         {{email}}
       </ul>

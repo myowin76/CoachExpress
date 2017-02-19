@@ -3,12 +3,13 @@ import {Component, OnInit, ViewChild, Input, EventEmitter, Output} from '@angula
 import { JourneysService } from '../shared/models/journeys.service';
 import { VehiclesService } from '../shared/models/vehicles.service';
 
-import { JourneyFormComponent } from '../journey-form/journey-form.component';
 import { Journey } from '../shared/models/journey';
 import { Vehicle } from '../shared/models/vehicle';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 import { ModalDirective } from 'ng2-bootstrap';
+
+import { DateFormatPipe } from '../shared/pipes/date-format.pipe';
 
 
 @Component({
@@ -38,7 +39,8 @@ export class JourneysComponent implements OnInit {
   companyId = '-KaiKfnmWpBYseUOaDxu';
   vehicles: Vehicle[];
 
-  newForm:FormGroup;
+  
+  
   
 
   @ViewChild('newModal') public newModal: ModalDirective;
@@ -46,18 +48,10 @@ export class JourneysComponent implements OnInit {
 
 
 	constructor(
-    private fb:FormBuilder,
     private journeysService: JourneysService,
     private vehiclesService: VehiclesService
   ){
-      this.newForm = this.fb.group({
-          depart_date: ['',Validators.required],
-          depart_time: ['',Validators.required],
-          company_name: [''],
-          vehicle_id: [''],
-          trip_id: [''],
-          note: ['']
-      });
+      
 	}
 
   ngOnInit() {
@@ -71,11 +65,7 @@ export class JourneysComponent implements OnInit {
 
   }
 
-  // onSelect(journey:Journey) {
-  //     this.selectedJourney = journey;
-  //     // this.journeyEmitter.emit(journey);
-  //     console.log(this.selectedJourney);
-  // }
+  
 
   viewJourneyDetails(key:string){
     this.selectedJourneyId = key;
@@ -83,7 +73,8 @@ export class JourneysComponent implements OnInit {
     this.journeysService.findJourneyById(key)
       .subscribe(journey => {
             this.selectedJourney = journey
-            console.log(this.selectedJourney);  
+            // console.log(this.selectedJourney.depart_date);  
+            console.log(new DateFormatPipe().transform(this.selectedJourney.depart_date, ['local']));
 
             this.journeyLoaded = true;
             this.childModal.show();
@@ -104,7 +95,7 @@ export class JourneysComponent implements OnInit {
   
 
   save(form) {
-      console.log('I AM HERE ');
+      
         this.journeysService.createNewJourney(this.companyId, form.value)
             .subscribe(
                 () => {
@@ -117,11 +108,18 @@ export class JourneysComponent implements OnInit {
 
     }
 
-  isErrorVisible(field:string, error:string) {
+  
 
-      return this.newForm.controls[field].dirty
-              && this.newForm.controls[field].errors &&
-              this.newForm.controls[field].errors[error];
+  update(journey) {
+    console.log("J1 " + journey);
+    console.log("J2 " + this.selectedJourney.$key);
+      // this.journeysService.updateJourney(this.selectedJourney.$key, journey)
+      //     .subscribe(
+      //         () => {
+      //             alert("journey saved succesfully.");
+      //         },
+      //         err => alert(`error saving lesson ${err}`)
+      //     );
 
   }
 }

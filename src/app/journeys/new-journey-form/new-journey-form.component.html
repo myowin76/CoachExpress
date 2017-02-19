@@ -1,0 +1,49 @@
+<p>
+  new-journey-form works!
+</p>
+<form [formGroup]="newForm" autocomplete="off" novalidate class="new-journey-form">
+				  	<div class="form-group">
+	            <div class="row">
+	                <div class="col-xs-6">
+	                    <label class="control-label"><i class="fa fa-calendar-o" aria-hidden="true"></i>Date</label>
+	                    <!-- <input type="text" class="form-control" name="depart_date" formControlName="depart_date" [(ngModel)]="depart_date"> -->
+	                    <datepicker [(ngModel)]="depart_date" [minDate]="minDate" [showWeeks]="true" [dateDisabled]="dateDisabled" formControlName="depart_date"></datepicker>
+
+
+
+	                    
+	                </div>
+
+	                <div class="col-xs-6">
+	                    <label class="control-label"><i class="fa fa-calendar-check-o" aria-hidden="true"></i>Time </label>
+	                    <input name="depart_time" class="form-control" formControlName="depart_time">
+	                    
+	                </div>
+	                
+	            </div>
+	            </div>
+	            <div class="form-group">
+		            <div class="row">
+		                <!-- <div class="col-xs-6">
+		                	<label class="control-label"><i class="fa fa-calendar-check-o" aria-hidden="true"></i>Company Name </label>
+		                	<input name="company_name" class="form-control"  formControlName="company_name">
+		                	
+		                </div> -->
+		                <div class="col-xs-6">
+		                	<label class="control-label"><i class="fa fa-calendar-check-o" aria-hidden="true"></i>Vehicle </label>
+		                	<select name="trips" class="form-control" formControlName="vehicle_id" >
+					                <option  *ngFor="let vehicle of vehicles" [ngValue]="vehicle.$key" >
+					                {{vehicle.number}}
+					                </option>
+					            </select>
+		                </div>
+		                <div class="col-xs-6">
+		                	<!-- <datepicker name="timeStartDate" [showWeeks]="false"></datepicker> -->
+		                </div>
+		            </div>
+		          </div>
+	        	
+
+		        
+
+		</form>

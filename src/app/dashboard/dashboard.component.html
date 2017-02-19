@@ -4,17 +4,8 @@
 		<h2>Dashboard</h2>
 	</header>
 
-	<!-- <button routerLink="/journeys/new" [queryParams]="{companyId: (company$ | async)?.$key }">
-	    New Journey
-	</button>
-	 -->
 
-	<!-- <button (click)="">New Journey</button> -->
-
-	<input class="search-bar" placeholder="Search"(keyup)="search(input.value)" #input>
+	<!-- <input class="search-bar" placeholder="Search"(keyup)="search(input.value)" #input> -->
 	<journey-list *ngIf="filtered" [journeys]="filtered"></journey-list>
-
-
-	<!-- <new-journey #new1></new-journey> -->
 
 </div>
